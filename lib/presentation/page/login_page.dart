@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:traver_v2/core/routing/app_route.dart';
+import 'package:traver_v2/core/usecase/auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +13,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool? selectedIndex = false;
   bool _obscureText = true; // Untuk mengontrol visibilitas password
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   void togglePasswordVisibility() {
     setState(() {
@@ -33,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Image.asset('assets/img/traver.png', height: 50),
             SizedBox(height: 40),
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.yellow),
@@ -46,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
@@ -109,7 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => ProsesAuth().login(
+                  emailController.text, passwordController.text, context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFCD240),
                 shape: RoundedRectangleBorder(

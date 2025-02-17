@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traver_v2/core/usecase/auth.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -8,6 +9,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +39,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             SizedBox(height: 40),
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.yellow),
@@ -49,7 +53,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             SizedBox(height: 36),
             ElevatedButton(
-              onPressed: () => {},
+              onPressed: () => ProsesAuth().forgotPassword(context, emailController.text),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFCD240),
                 shape: RoundedRectangleBorder(

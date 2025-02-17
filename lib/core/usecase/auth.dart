@@ -84,7 +84,52 @@ class ProsesAuth {
         body: jsonEncode({"email": email, "password": password}));
 
     if (response.statusCode == 200) {
-      
+      return context.goNamed(Routes.home);
+    } else {
+      return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              "Login Gagal, silahkan cek kembali email dan password Anda."),
+        ),
+      );
+    }
+  }
+
+  Future forgotPassword(BuildContext context, String email) async {
+    Uri url = Uri.parse("${dotenv.env['baseUrl']}/auth/forgot-password");
+
+    var response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({"email": email}));
+
+    if (response.statusCode == 200) {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Permintaan Berhasil"),
+            content:
+                Text("Silahkan cek email Anda untuk instruksi reset password."),
+            actions: [
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  context.goNamed(Routes.login);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Permintaan Gagal, silahkan coba lagi."),
+        ),
+      );
     }
   }
 }
