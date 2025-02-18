@@ -9,4 +9,6 @@ class Routes {
   static const forgot = "forgot";
   static const success = "success";
   static const home = "home";
+  static const search = "search";
+  static const detail = "detail";
 }

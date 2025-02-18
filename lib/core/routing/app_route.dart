@@ -1,10 +1,12 @@
 import 'package:go_router/go_router.dart';
+import 'package:traver_v2/presentation/page/detail.dart';
 import 'package:traver_v2/presentation/page/forgot_page.dart';
 import 'package:traver_v2/presentation/page/home.dart';
 import 'package:traver_v2/presentation/page/introduction.dart';
 import 'package:traver_v2/presentation/page/login_page.dart';
 import 'package:traver_v2/presentation/page/otp_page.dart';
 import 'package:traver_v2/presentation/page/register_page.dart';
+import 'package:traver_v2/presentation/page/search.dart';
 import 'package:traver_v2/presentation/page/splash_page.dart';
 import 'package:traver_v2/presentation/page/success_page.dart';
 
@@ -47,10 +49,21 @@ final appRoute = GoRouter(routes: [
           name: Routes.forgot,
           builder: (context, state) => ForgotPasswordScreen(),
         ),
-        GoRoute(
-          path: "home",
-          name: Routes.home,
-          builder: (context, state) => HomeScreen(),
-        ),
       ]),
+  GoRoute(
+      path: "/home",
+      name: Routes.home,
+      builder: (context, state) => HomeScreen(),
+      routes: [
+        GoRoute(
+          path: "detail",
+          name: Routes.detail,
+          builder: (context, state) => DetailPage(),
+        ),
+        GoRoute(
+          path: "search",
+          name: Routes.search,
+          builder: (context, state) => SearchPage(),
+        )
+      ])
 ]);

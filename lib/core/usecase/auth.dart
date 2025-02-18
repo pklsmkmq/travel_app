@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings, use_build_context_synchronously, unused_local_variable
+// ignore_for_file: prefer_interpolation_to_compose_strings, use_build_context_synchronously, unused_local_variable, avoid_print
 
 import 'dart:convert';
 
