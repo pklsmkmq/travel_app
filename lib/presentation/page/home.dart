@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+// import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../widget/home/judul.dart';
 import '../widget/home/kategori.dart';

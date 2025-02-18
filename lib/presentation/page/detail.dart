@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:traver_v2/presentation/widget/home/gallery.dart';
 import 'package:traver_v2/presentation/widget/home/judul.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 import '../widget/home/kategori.dart';
 import '../widget/home/review.dart';
@@ -18,20 +17,6 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  final flutterWebviewPlugin = FlutterWebviewPlugin();
-
-  @override
-  void initState() {
-    super.initState();
-    flutterWebviewPlugin.close();
-  }
-
-  @override
-  void dispose() {
-    flutterWebviewPlugin.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     var tinggi = MediaQuery.of(context).size.height;
