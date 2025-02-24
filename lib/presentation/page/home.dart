@@ -1,9 +1,12 @@
-// ignore_for_file: unused_import, unused_local_variable
+// ignore_for_file: unused_import, unused_local_variable, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:traver_v2/core/usecase/home.dart';
 // import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../../core/models/model.dart';
 import '../widget/home/judul.dart';
 import '../widget/home/kategori.dart';
 import '../widget/home/popular.dart';
@@ -19,6 +22,39 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int menu = 0;
   List lsMenu = [HomeScreen(), null, null, null];
+  Login? dataUser;
+  List<Categories> data = [];
+
+  getData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final loginData = prefs.getString('login');
+    print(loginData.runtimeType);
+
+    if (loginData != null) {
+      setState(() {
+        dataUser = loginFromJson(loginData.toString());
+        print(dataUser);
+      });
+    } else {
+      print("No login data found");
+    }
+
+    HomeController().getCategory().then(
+      (value) {
+        setState(() {
+          if (value != null) {
+            data = value;
+          }
+        });
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Icon(Icons.person),
                             ),
                           ),
-                          Text("Hello, Jhon Doe",
+                          Text("Hello, ${dataUser?.user.name}",
                               style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
                                       fontSize: 20,
@@ -90,11 +126,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: EdgeInsets.only(bottom: tinggi * 0.03),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: Wrap(spacing: 20, children: [
-                        Category("Beach", "assets/img/beach.png", lebar),
-                        Category("Mountain", "assets/img/mountains.png", lebar),
-                        Category("Religion", "assets/img/mosque.png", lebar),
-                      ]),
+                      child: Wrap(
+                          spacing: 20,
+                          children: List.generate(data.length, (index) {
+                            return Category(
+                                data[index].name, data[index].image, lebar);
+                          })
+                          // [
+                          //   Category("Beach", "assets/img/beach.png", lebar),
+                          //   Category("Mountain", "assets/img/mountains.png", lebar),
+                          //   Category("Religion", "assets/img/mosque.png", lebar),
+                          // ]
+                          ),
                     )),
                 //end category
                 //start favorit

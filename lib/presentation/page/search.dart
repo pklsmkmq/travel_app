@@ -1,4 +1,4 @@
-// ignore_for_file: sort_child_properties_last, use_key_in_widget_constructors, library_private_types_in_public_api
+// ignore_for_file: sort_child_properties_last, use_key_in_widget_constructors, library_private_types_in_public_api, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,8 +60,6 @@ class _SearchPageState extends State<SearchPage> {
                           hintStyle: GoogleFonts.poppins(fontSize: 20)),
                     ),
                   ),
-//end search
-//start popular
                   Judul("We Found 4 Trip in Bali", "", tinggi),
                   Container(
                       margin: EdgeInsets.only(bottom: tinggi * 0.03),
